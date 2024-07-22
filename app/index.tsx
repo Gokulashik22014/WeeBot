@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const TabBar = () => {
+const Index = () => {
   return (
     <View>
-      <Text>TabBar</Text>
+      <Text>index</Text>
     </View>
   )
 }
 
-export default TabBar
+export default Index
