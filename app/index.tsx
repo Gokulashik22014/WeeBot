@@ -7,29 +7,35 @@ import {
   StatusBar,
   StyleSheet,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import data from "@/constants/characters";
+import { useNavigation } from "expo-router/build/useNavigation";
+import { router } from "expo-router/build/imperative-api";
+import { useCharacterContext } from "@/provider/CharacterProvider";
 const Index = () => {
-  const [character, setCharacter] = useState(data[0]);
+  const {character, setCharacter} = useCharacterContext()
   const getDynamicBackground = () => {
     return {
-      backgroundColor: character.name + "primary", // Replace this with actual color logic
+      backgroundColor: character.primary, // Replace this with actual color logic
     };
   };
   const getDynamicColor = () => {
     return {
-      color: character.name + "primary", // Replace this with actual color logic
+      color: character.primary, // Replace this with actual color logic
     };
   };
+  const handlePress=()=>{
+    router.push("/chat")
+  }
   return (
     <SafeAreaView className="h-full bg-background">
       <View className="mt-20 space-y-9 mx-7">
         <View className="justify-center items-center">
-          <Text className={`text-3xl `}>Hi There!!</Text>
+          <Text className={`text-3xl `} style={[getDynamicColor()]}>Hi There!!</Text>
         </View>
         <View className="justify-center items-center text-center mb-7">
-          <Text className="text-3xl">I am</Text>
-          <Text className="text-3xl">{character.fullname}</Text>
+          <Text className="text-3xl" style={[getDynamicColor()]}>I am</Text>
+          <Text className="text-3xl" style={[getDynamicColor()]}>{character.fullname}</Text>
         </View>
         <View className="justify-center items-center mb-7">
           <Image
@@ -53,7 +59,7 @@ const Index = () => {
           <Text className="text-lg text-slate-500">Welcome to <Text className="font-bold text-red-500">WeeBot</Text></Text>
           <Text className="text-md text-slate-900">Choose your talk buddy</Text>
         </View>
-        <TouchableOpacity className={`px-12 py-4 rounded-lg bg-${getDynamicBackground()}`} >
+        <TouchableOpacity className={`px-12 py-4 rounded-lg`} style={[getDynamicBackground()]} onPress={handlePress}>
           <Text className="text-white text-center text-lg">Start Conversation</Text>
         </TouchableOpacity>
       </View>
